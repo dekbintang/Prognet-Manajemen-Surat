@@ -1,12 +1,20 @@
 <x-app-layout>
+    @php
+        $canWrite = in_array(auth()->user()->role ?? '', ['admin']); // kalau operator juga boleh, tambah 'operator'
+        // contoh: ['admin','operator']
+    @endphp
+
     <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
         <div>
             <h1 class="h3 fw-bold mb-1">Jenis Agenda</h1>
             <div class="text-secondary">Kelola master jenis agenda</div>
         </div>
-        <a href="{{ route('jenis-agenda.create') }}" class="btn btn-primary rounded-4 px-4 py-2 fw-semibold">
-            <i class="bi bi-plus-lg me-2"></i>Tambah Jenis
-        </a>
+
+        @if($canWrite)
+            <a href="{{ route('jenis-agenda.create') }}" class="btn btn-primary rounded-4 px-4 py-2 fw-semibold">
+                <i class="bi bi-plus-lg me-2"></i>Tambah Jenis
+            </a>
+        @endif
     </div>
 
     <form method="GET" class="row g-2 mb-3">
@@ -40,12 +48,24 @@
                         <td class="px-4 py-3 text-secondary">{{ $item->deskripsi ?? '-' }}</td>
                         <td class="px-4 py-3">
                             <div class="d-flex justify-content-end gap-2">
-                                <a class="btn btn-light border rounded-4" href="{{ route('jenis-agenda.show', $item) }}"><i class="bi bi-eye"></i></a>
-                                <a class="btn btn-light border rounded-4" href="{{ route('jenis-agenda.edit', $item) }}"><i class="bi bi-pencil-square"></i></a>
-                                <form method="POST" action="{{ route('jenis-agenda.destroy', $item) }}" onsubmit="return confirm('Hapus jenis agenda ini?')">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-light border rounded-4" type="submit"><i class="bi bi-trash"></i></button>
-                                </form>
+                                <a class="btn btn-light border rounded-4" href="{{ route('jenis-agenda.show', $item) }}">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                                @if($canWrite)
+                                    <a class="btn btn-light border rounded-4" href="{{ route('jenis-agenda.edit', $item) }}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <form method="POST" action="{{ route('jenis-agenda.destroy', $item) }}"
+                                          onsubmit="return confirm('Hapus jenis agenda ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-light border rounded-4" type="submit">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -55,6 +75,7 @@
                 </tbody>
             </table>
         </div>
+
         <div class="card-body pt-3">
             {{ $jenisAgendas->links() }}
         </div>

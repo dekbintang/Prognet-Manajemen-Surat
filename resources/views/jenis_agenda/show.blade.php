@@ -5,9 +5,6 @@
             <div class="text-secondary">{{ $jenisAgenda->nama_jenis }}</div>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('jenis-agenda.edit', $jenisAgenda) }}" class="btn btn-primary rounded-4 px-4 py-2">
-                <i class="bi bi-pencil-square me-2"></i>Edit
-            </a>
             <a href="{{ route('jenis-agenda.index') }}" class="btn btn-outline-secondary rounded-4 px-4 py-2">
                 <i class="bi bi-arrow-left me-2"></i>Kembali
             </a>

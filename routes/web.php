@@ -15,40 +15,49 @@ Route::get('/', fn () => redirect()->route('dashboard'));
 
 Route::middleware(['auth'])->group(function () {
 
-    // Dashboard
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard + Profile
+    |--------------------------------------------------------------------------
+    */
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    /**
-     * =========================================================
-     * READ ONLY (SEMUA USER LOGIN)
-     * =========================================================
-     */
+
+    Route::get('/profile',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile',[ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile',[ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | READ-ONLY (SEMUA USER LOGIN)
+    |--------------------------------------------------------------------------
+    | Semua yang login boleh lihat daftar & detail.
+    | Create/Update/Delete dibatasi role di bawah.
+    */
     Route::resource('kategori', KategoriSuratController::class)
         ->only(['index', 'show'])
         ->parameters(['kategori' => 'kategoriSurat'])
-        ->where(['kategoriSurat' => '[0-9]+']);
+        ->whereNumber('kategoriSurat');
 
     Route::resource('jenis-agenda', JenisAgendaController::class)
         ->only(['index', 'show'])
         ->parameters(['jenis-agenda' => 'jenisAgenda'])
-        ->where(['jenisAgenda' => '[0-9]+']);
+        ->whereNumber('jenisAgenda');
 
     Route::resource('surat-masuk', SuratMasukController::class)
         ->only(['index', 'show'])
         ->parameters(['surat-masuk' => 'suratMasuk'])
-        ->where(['suratMasuk' => '[0-9]+']); // ✅ penting
+        ->whereNumber('suratMasuk');
 
     Route::resource('surat-keluar', SuratKeluarController::class)
         ->only(['index', 'show'])
         ->parameters(['surat-keluar' => 'suratKeluar'])
-        ->where(['suratKeluar' => '[0-9]+']);
+        ->whereNumber('suratKeluar');
 
     Route::resource('agenda', AgendaKegiatanController::class)
         ->only(['index', 'show'])
         ->parameters(['agenda' => 'agendaKegiatan'])
-        ->where(['agendaKegiatan' => '[0-9]+']);
+        ->whereNumber('agendaKegiatan');
 
     // Disposisi READ (semua user login boleh lihat)
     Route::scopeBindings()->group(function () {
@@ -57,21 +66,22 @@ Route::middleware(['auth'])->group(function () {
             ->name('surat-masuk.disposisi.index');
     });
 
-    /**
-     * =========================================================
-     * WRITE ACCESS (ROLE TERTENTU)
-     * =========================================================
-     */
+
+    /*
+    |--------------------------------------------------------------------------
+    | WRITE ACCESS (ROLE TERTENTU)
+    |--------------------------------------------------------------------------
+    */
 
     // MASTER DATA -> admin saja
     Route::middleware(['role:admin'])->group(function () {
         Route::resource('kategori', KategoriSuratController::class)
-            ->except(['index', 'show'])
+            ->only(['create', 'store', 'edit', 'update', 'destroy'])
             ->parameters(['kategori' => 'kategoriSurat'])
             ->whereNumber('kategoriSurat');
 
         Route::resource('jenis-agenda', JenisAgendaController::class)
-            ->except(['index', 'show'])
+            ->only(['create', 'store', 'edit', 'update', 'destroy'])
             ->parameters(['jenis-agenda' => 'jenisAgenda'])
             ->whereNumber('jenisAgenda');
     });
@@ -79,12 +89,12 @@ Route::middleware(['auth'])->group(function () {
     // SURAT -> admin + operator
     Route::middleware(['role:admin,operator'])->group(function () {
         Route::resource('surat-masuk', SuratMasukController::class)
-            ->except(['index', 'show'])
+            ->only(['create', 'store', 'edit', 'update', 'destroy'])
             ->parameters(['surat-masuk' => 'suratMasuk'])
             ->whereNumber('suratMasuk');
 
         Route::resource('surat-keluar', SuratKeluarController::class)
-            ->except(['index', 'show'])
+            ->only(['create', 'store', 'edit', 'update', 'destroy'])
             ->parameters(['surat-keluar' => 'suratKeluar'])
             ->whereNumber('suratKeluar');
     });
@@ -92,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
     // AGENDA -> admin + pimpinan
     Route::middleware(['role:admin,pimpinan'])->group(function () {
         Route::resource('agenda', AgendaKegiatanController::class)
-            ->except(['index', 'show'])
+            ->only(['create', 'store', 'edit', 'update', 'destroy'])
             ->parameters(['agenda' => 'agendaKegiatan'])
             ->whereNumber('agendaKegiatan');
     });
@@ -120,4 +130,4 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -12,10 +12,15 @@
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4 p-lg-5">
             <form method="POST" action="{{ route('jenis-agenda.update', $jenisAgenda) }}">
-                @csrf @method('PUT')
+                @csrf
+                @method('PUT')
+
                 @include('jenis_agenda._form', ['jenisAgenda' => $jenisAgenda])
+
                 <div class="d-flex gap-2 mt-4">
-                    <button class="btn btn-primary rounded-4 px-4 py-2 fw-semibold" type="submit"><i class="bi bi-save me-2"></i>Simpan</button>
+                    <button class="btn btn-primary rounded-4 px-4 py-2 fw-semibold" type="submit">
+                        <i class="bi bi-save me-2"></i>Simpan
+                    </button>
                     <a class="btn btn-light border rounded-4 px-4 py-2" href="{{ route('jenis-agenda.index') }}">Batal</a>
                 </div>
             </form>
