@@ -1,59 +1,178 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+
+# 📬 SuratFlow — Sistem Manajemen Surat & Disposisi
+### *Enterprise Correspondence, Archiving & Disposition Tracking System*
+
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  Aplikasi manajemen persuratan dan administrasi perkantoran modern berbasis web. Mempermudah pencatatan surat masuk, pengelolaan surat keluar, pelacakan lembar disposisi pimpinan, dan penjadwalan agenda kegiatan dinas secara terstruktur dan terotomatisasi.
 </p>
 
-## About Laravel
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📌 Latar Belakang & Solusi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Sistem administrasi persuratan fisik pada instansi maupun organisasi sering kali mengalami kendala seperti surat tercecer, lambatnya alur birokrasi penyerahan disposisi ke pimpinan, dan sulitnya melacak riwayat surat terdahulu.
 
-## Learning Laravel
+**SuratFlow** dirancang untuk mendigitalkan birokrasi persuratan perkantoran dengan keunggulan:
+* **Digital Correspondence Archiving:** Seluruh surat masuk dan keluar terindeks rapi berdasarkan nomor surat, tanggal, pengirim, dan kategori.
+* **Hierarchical Letter Disposition:** Disposisi surat dapat langsung dibuat oleh pimpinan, diteruskan ke staf terkait, dan dipantau status tindak lanjutnya.
+* **Granular Role-Based Permissions:** Memisahkan wewenang antara Administrator, Operator Tata Usaha, Pimpinan, dan Staf umum (*Viewer*).
+* **Agenda Dinas Terpadu:** Pengelolaan jadwal kegiatan dan rapat internal yang terintegrasi langsung dengan kalender dinas.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🌟 Fitur Unggulan
 
-## Laravel Sponsors
+```
+                                  ┌────────────────────────┐
+                                  │      SURAT MASUK       │
+                                  └───────────┬────────────┘
+                                              │
+                      ┌───────────────────────┴───────────────────────┐
+                      ▼                                               ▼
+          ┌───────────────────────┐                       ┌───────────────────────┐
+          │   Operator Input &    │                       │  Disposisi Pimpinan   │
+          │   Verifikasi Berkas   │                       │   (Instruksi & Sifat) │
+          └───────────┬───────────┘                       └───────────┬───────────┘
+                      │                                               │
+                      └───────────────────────┬───────────────────────┘
+                                              │
+                                              ▼
+                                ┌───────────────────────────┐
+                                │   Tindak Lanjut Pegawai   │
+                                │   & Riwayat Pengarsipan   │
+                                └───────────────────────────┘
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. 📥 Modul Surat Masuk & Berkas Lampiran
+* Pencatatan nomor agenda, nomor surat, instansi pengirim, perihal, dan tanggal penerimaan.
+* Pengkategorian otomatis (Dinas, Undangan, Rahasia, Edaran, dll).
 
-### Premium Partners
+### 2. 📤 Modul Surat Keluar
+* Penomoran surat resmi organisasi secara terstandar.
+* Pencatatan tujuan surat, tanggal kirim, dan riwayat dokumen yang telah disetujui.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3. 📝 Modul Disposisi Elektronik
+* Pembuatan lembar disposisi digital oleh **Pimpinan**.
+* Instruksi tindak lanjut bertingkat (Sangat Segera, Segera, Rahasia, Biasa).
+* Fitur *Scope Bindings* di Laravel untuk memastikan disposisi selalu terikat valid dengan surat masuk yang bersangkutan.
 
-## Contributing
+### 4. 📅 Kalender Agenda Kegiatan
+* Penjadwalan agenda rapat, kunjungan dinas, dan kegiatan operasional.
+* Kategori agenda untuk memfilter kegiatan prioritas tinggi.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. 👥 Hak Akses Bertingkat (RBAC)
+* Pembagian hak akses jelas:
+  * **Admin:** Akses menyeluruh, manajemen master data (kategori surat & jenis agenda).
+  * **Operator:** Input, edit, dan hapus berkas surat masuk serta surat keluar.
+  * **Pimpinan:** Memberikan instruksi disposisi dan menetapkan agenda dinas.
+  * **User / Viewer:** Melihat daftar surat dan agenda secara *read-only*.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 👥 Matriks Hak Akses Pengguna
 
-## Security Vulnerabilities
+| Fitur / Modul | Admin | Operator | Pimpinan | User (Viewer) |
+| :--- | :---: | :---: | :---: | :---: |
+| Lihat Daftar Surat & Detail | ✅ | ✅ | ✅ | ✅ |
+| Tambah / Edit / Hapus Surat | ✅ | ✅ | ❌ | ❌ |
+| Buat & Edit Lembar Disposisi | ✅ | ❌ | ✅ | ❌ |
+| Kelola Agenda Kegiatan Dinas | ✅ | ❌ | ✅ | ❌ |
+| Master Kategori & Jenis Agenda | ✅ | ❌ | ❌ | ❌ |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🛠️ Tech Stack
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* **Backend Framework:** [Laravel 12](https://laravel.com/)
+* **Frontend:** [Blade Templates](https://laravel.com/docs/blade), [Tailwind CSS](https://tailwindcss.com/)
+* **Autentikasi:** Laravel Breeze
+* **Database:** MySQL 8.0 / MariaDB
+* **Build Engine:** Vite
+
+---
+
+## ⚡ Panduan Setup Lokal
+
+### Prasyarat
+* PHP >= 8.2
+* Composer >= 2.5
+* Node.js & NPM
+* Database MySQL
+
+### Langkah Instalasi
+
+1. **Clone Repositori:**
+   ```bash
+   git clone https://github.com/dekbintang/Prognet-Manajemen-Surat.git
+   cd Prognet-Manajemen-Surat
+   ```
+
+2. **Instal Dependensi:**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Setup Konfigurasi Environment:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+   Pastikan parameter database di file `.env` sudah sesuai:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=manajemen_surat
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+4. **Jalankan Migrasi & Database Seeder:**
+   ```bash
+   php artisan migrate --seed
+   ```
+   *Seeder akan membuat akun demo, master kategori, data surat contoh, serta riwayat disposisi.*
+
+5. **Kompilasi Aset & Jalankan Aplikasi:**
+   ```bash
+   npm run build
+   php artisan serve
+   ```
+   Buka alamat: `http://localhost:8000`
+
+---
+
+## 🔑 Akun Uji Coba (Demo Accounts)
+
+Setiap akun uji coba menggunakan password: `password`
+
+| Role | Email Login | Hak Akses |
+| :--- | :--- | :--- |
+| **Administrator** | `admin@mail.com` | Penuh (Master Data, Pengguna, Surat, Agenda) |
+| **Operator** | `operator@mail.com` | Pengelolaan Surat Masuk & Keluar |
+| **Pimpinan** | `pimpinan@mail.com` | Pembuatan Disposisi & Penetapan Agenda |
+| **Staf (Viewer)** | `user@mail.com` | Melihat Arsip & Agenda (*Read-Only*) |
+
+---
+
+## 👨‍💻 Pengembang
+
+**I Kadek Bintang Adi Bimantara**  
+*Program Studi Teknologi Informasi — Universitas Udayana*  
+* [GitHub Profile](https://github.com/dekbintang)
+* [Instagram](https://instagram.com/ikadek_bintang)
+
+---
+
+## 📄 Lisensi
+Proyek ini dilisensikan di bawah [Lisensi MIT](LICENSE).
